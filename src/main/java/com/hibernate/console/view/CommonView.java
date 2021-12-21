@@ -3,13 +3,15 @@ package com.hibernate.console.view;
 import java.util.Scanner;
 
 public class CommonView {
+    private static CommonView view;
     private OrderView orderView;
     private AccountView accountView;
-    private static CommonView view;
+    private CustomerView customerView;
 
     private CommonView() {
         orderView = new OrderView();
         accountView = new AccountView();
+        customerView = new CustomerView();
     }
 
     public static CommonView getInstance() {
@@ -18,7 +20,6 @@ public class CommonView {
         }
         return view;
     }
-
 
     public void run() {
         Scanner scanner = new Scanner(System.in);
@@ -33,6 +34,8 @@ public class CommonView {
                     break;
                 case 2:
                     runAccount();
+                case 3:
+                    runCustomer();
                 case 4:
                     go = false;
                     break;
@@ -49,5 +52,9 @@ public class CommonView {
 
     public void runAccount() {
         accountView.run();
+    }
+
+    public void runCustomer() {
+        customerView.run();
     }
 }

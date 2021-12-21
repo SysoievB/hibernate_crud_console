@@ -16,6 +16,10 @@ public class Order extends BaseEntity {
     public Order() {
     }
 
+    public Order(Long id) {
+        this.id = id;
+    }
+
     public Order(Long id, String orderName) {
         this.id = id;
         this.orderName = orderName;
