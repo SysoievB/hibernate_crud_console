@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "customers")
@@ -14,11 +15,13 @@ public class Customer extends BaseEntity {
     private String name;
     @Column(name = "surname")
     private String surname;
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id")
-    @OneToOne(cascade = {CascadeType.ALL})
     private Account account;
-    @Column(name = "order_id")
-    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @JoinTable(name = "customers_orders",
+            joinColumns = @JoinColumn(name = "customer_id"),
+            inverseJoinColumns = @JoinColumn(name = "order_id"))
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Order> orders = new HashSet<>();
 
     public Customer() {
@@ -38,8 +41,16 @@ public class Customer extends BaseEntity {
         this.orders = orders;
     }
 
+    public Set<Long> ordersToString() {
+
+        return orders
+                .stream()
+                .map(Order::getId)
+                .collect(Collectors.toSet());
+    }
+
     @Override
     public String toString() {
-        return id + " " + name + " " + surname + " " + account.getId() + " " + orders;
+        return id + " " + name + " " + surname + " " + account.getId() + " " + ordersToString();
     }
 }

@@ -74,14 +74,36 @@ public class CustomerView {
 
 
     public void updateCustomer() {
-        Customer newCustomer;
         System.out.println("Enter id in order to find element:");
         Long id = Long.parseLong(scanner.next());
         System.out.println("Enter name:");
         String name = scanner.next();
         System.out.println("Enter surname:");
         String surname = scanner.next();
-        newCustomer = new Customer(id, name, surname);
+        System.out.println("Enter id of account:");
+        Long idAccount = Long.parseLong(scanner.next());
+        Account account = new Account(idAccount);
+        Set<Order> orderSet = new HashSet<>();
+        System.out.println("Enter id of order:");
+        Long idOrder = Long.parseLong(scanner.next());
+        orderSet.add(new Order(idOrder));
+        boolean go = true;
+        while (go) {
+            System.out.println("Do You want to add one more id of order? 1.Yes 2.No");
+            String yesOrNo = scanner.next();
+            switch (yesOrNo) {
+                case ("1"):
+                    System.out.println("Enter id of new order:");
+                    Long newIdOrder = Long.parseLong(scanner.next());
+                    orderSet.add(new Order(newIdOrder));
+                    break;
+                case ("2"):
+                    System.out.println("You choose do not add new order");
+                    go = false;
+                    break;
+            }
+        }
+        Customer newCustomer = new Customer(id, name, surname, account, orderSet);
         customerController.updateCustomer(id, newCustomer);
     }
 

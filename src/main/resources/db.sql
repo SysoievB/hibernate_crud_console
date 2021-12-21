@@ -24,11 +24,10 @@ create table if not exists customers
     foreign key (account_id) references accounts (id)
 );
 
-create table if not exists customer_orders
+create table if not exists customers_orders
 (
     customer_id bigint not null,
     order_id    bigint not null,
-    UNIQUE (customer_id, order_id),
     foreign key (customer_id) references customers (id) on update cascade on delete cascade,
     foreign key (order_id) references orders (id)
 );
