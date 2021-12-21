@@ -9,11 +9,13 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 public class OrderRepositoryImpl implements OrderRepository {
-    private Session session = HibernateUtil.getSessionFactory().openSession();
-    private Transaction transaction = session.beginTransaction();
+    private Session session;
+    private Transaction transaction;
 
     @Override
     public void save(Order order) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        transaction = session.beginTransaction();
         session.save(order);
         transaction.commit();
         session.close();
@@ -21,7 +23,9 @@ public class OrderRepositoryImpl implements OrderRepository {
 
     @Override
     public List<Order> getAll() {
-        List<Order> orders = session.createQuery("from orders").getResultList();
+        session = HibernateUtil.getSessionFactory().openSession();
+        transaction = session.beginTransaction();
+        List<Order> orders = (List<Order>) session.createQuery("from Order", Order.class).getResultList();
         transaction.commit();
         session.close();
 
@@ -30,6 +34,8 @@ public class OrderRepositoryImpl implements OrderRepository {
 
     @Override
     public Order getById(Long id) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        transaction = session.beginTransaction();
         Order order = session.get(Order.class, id);
         transaction.commit();
         session.close();
@@ -39,6 +45,8 @@ public class OrderRepositoryImpl implements OrderRepository {
 
     @Override
     public void update(Long id, Order order) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        transaction = session.beginTransaction();
         session.saveOrUpdate(order);
         transaction.commit();
         session.close();
@@ -46,6 +54,8 @@ public class OrderRepositoryImpl implements OrderRepository {
 
     @Override
     public void deleteById(Long id) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        transaction = session.beginTransaction();
         Order order = session.get(Order.class, id);
         session.remove(order);
         transaction.commit();
