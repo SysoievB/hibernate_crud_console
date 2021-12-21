@@ -1,53 +1,53 @@
 package com.hibernate.console.repository.impl;
 
-import com.hibernate.console.model.Order;
-import com.hibernate.console.repository.OrderRepository;
+import com.hibernate.console.model.Account;
+import com.hibernate.console.repository.AccountRepository;
 import com.hibernate.console.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class OrderRepositoryImpl implements OrderRepository {
+public class AccountRepositoryImpl implements AccountRepository {
     private Session session;
     private Transaction transaction;
 
     @Override
-    public void add(Order order) {
+    public void add(Account account) {
         session = HibernateUtil.getSessionFactory().openSession();
         transaction = session.beginTransaction();
-        session.save(order);
+        session.save(account);
         transaction.commit();
         session.close();
     }
 
     @Override
-    public List<Order> getAll() {
+    public List<Account> getAll() {
         session = HibernateUtil.getSessionFactory().openSession();
         transaction = session.beginTransaction();
-        List<Order> orders = session.createQuery("from Order", Order.class).getResultList();
+        List<Account> accounts = session.createQuery("from Account", Account.class).getResultList();
         transaction.commit();
         session.close();
 
-        return orders;
+        return accounts;
     }
 
     @Override
-    public Order getById(Long id) {
+    public Account getById(Long id) {
         session = HibernateUtil.getSessionFactory().openSession();
         transaction = session.beginTransaction();
-        Order order = session.get(Order.class, id);
+        Account account = session.get(Account.class, id);
         transaction.commit();
         session.close();
 
-        return order;
+        return account;
     }
 
     @Override
-    public void update(Long id, Order order) {
+    public void update(Long id, Account account) {
         session = HibernateUtil.getSessionFactory().openSession();
         transaction = session.beginTransaction();
-        session.saveOrUpdate(order);
+        session.saveOrUpdate(account);
         transaction.commit();
         session.close();
     }
@@ -56,8 +56,8 @@ public class OrderRepositoryImpl implements OrderRepository {
     public void deleteById(Long id) {
         session = HibernateUtil.getSessionFactory().openSession();
         transaction = session.beginTransaction();
-        Order order = session.get(Order.class, id);
-        session.remove(order);
+        Account account = session.get(Account.class, id);
+        session.remove(account);
         transaction.commit();
         session.close();
     }

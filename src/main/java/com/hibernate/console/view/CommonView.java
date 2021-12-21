@@ -3,12 +3,13 @@ package com.hibernate.console.view;
 import java.util.Scanner;
 
 public class CommonView {
-
     private OrderView orderView;
+    private AccountView accountView;
     private static CommonView view;
 
     private CommonView() {
         orderView = new OrderView();
+        accountView = new AccountView();
     }
 
     public static CommonView getInstance() {
@@ -23,17 +24,15 @@ public class CommonView {
         Scanner scanner = new Scanner(System.in);
         boolean go = true;
         while (go) {
-            System.out.println("\nChoose file in order to do operations, please:" +
-                    "\nEnter number:" +
-                    "\n1.Orders" +
-                    "\n2.Accounts" +
-                    "\n3.Customers" +
-                    "\n4.Exit");
+            var statements = "\nChoose file in order to do operations, please:\nEnter number:\n1.Orders\n2.Accounts\n3.Customers\n4.Exit";
+            statements.lines().forEach(System.out::println);
             int number = scanner.nextInt();
             switch (number) {
                 case 1:
                     runOrder();
                     break;
+                case 2:
+                    runAccount();
                 case 4:
                     go = false;
                     break;
@@ -46,5 +45,9 @@ public class CommonView {
 
     public void runOrder() {
         orderView.run();
+    }
+
+    public void runAccount() {
+        accountView.run();
     }
 }
