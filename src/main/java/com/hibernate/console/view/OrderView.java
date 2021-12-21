@@ -10,12 +10,12 @@ public class OrderView {
     private OrderController controller = new OrderController();
 
     public void printOrders() {
-        System.out.println("List of all orders: ");
+        System.out.println("List of all orders:");
         controller.printAll().forEach(System.out::println);
     }
 
     public void deleteOrder() {
-        System.out.println("Enter id in order to delete row: ");
+        System.out.println("Enter id in order to delete row:");
         Long index = Long.parseLong(scanner.next());
         controller.deleteOrder(index);
     }
@@ -28,16 +28,15 @@ public class OrderView {
                 System.out.println(controller.getValueByIndex(id).toString());
 
         } catch (NullPointerException e) {
-            System.out.println("There is no such number ");
-            System.out.println("Try one more time, please");
+            System.out.println("There is no such number\nTry one more time, please");
             getByIdOrder();
         }
     }
 
     public void saveOrder() {
-        System.out.println("Enter id: ");
+        System.out.println("Enter id:");
         Long id = Long.parseLong(scanner.next());
-        System.out.println("Enter order: ");
+        System.out.println("Enter order:");
         String orderName = scanner.next();
         Order newOrder = new Order(id, orderName);
         controller.saveOrder(newOrder);
@@ -46,7 +45,7 @@ public class OrderView {
     public void updateOrder() {
         System.out.println("Enter id in order to find element:");
         Long id = Long.parseLong(scanner.next());
-        System.out.println("Enter new order: ");
+        System.out.println("Enter new order:");
         String orderName = scanner.next();
         Order newOrder = new Order(id, orderName);
         controller.updateOrder(id, newOrder);
@@ -55,14 +54,8 @@ public class OrderView {
     public void run() {
         boolean go = true;
         while (go) {
-            System.out.println("\nChoose option, please:" +
-                    "\nEnter number:" +
-                    "\n1. Show all rows" +
-                    "\n2. Insert new row" +
-                    "\n3. Delete row" +
-                    "\n4. Update row" +
-                    "\n5. Search by id" +
-                    "\n6. End");
+            var variants = "\nChoose option, please:\nEnter number:\n1. Show all rows\n2. Insert new row\n3. Delete row\n4. Update row\n5. Search by id\n6. End";
+            variants.lines().forEach(System.out::println);
             int number = scanner.nextInt();
             switch (number) {
                 case 1:
@@ -84,7 +77,7 @@ public class OrderView {
                     go = false;
                     break;
                 default:
-                    System.out.println("Wrong number " +
+                    System.out.println("Wrong number" +
                             "\nEnter number from 1 to 6, please");
             }
         }

@@ -15,7 +15,7 @@ public class OrderController {
     }
 
     public void saveOrder(Order newOrder) {
-        orderRepository.save(newOrder);
+        orderRepository.add(newOrder);
     }
 
     public void deleteOrder(Long index) {

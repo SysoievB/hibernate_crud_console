@@ -13,7 +13,7 @@ public class OrderRepositoryImpl implements OrderRepository {
     private Transaction transaction;
 
     @Override
-    public void save(Order order) {
+    public void add(Order order) {
         session = HibernateUtil.getSessionFactory().openSession();
         transaction = session.beginTransaction();
         session.save(order);

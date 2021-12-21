@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface GenericRepository<T, ID> {
 
-    void save(T data);
+    void add(T data);
 
     List<T> getAll();
 
