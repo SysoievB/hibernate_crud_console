@@ -1,5 +1,15 @@
 package com.hibernate.console.model;
 
+import lombok.Data;
+
+import javax.persistence.*;
+
+@MappedSuperclass
+@Entity
+@Data
 public class BaseEntity {
-    private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    protected Long id;
 }
