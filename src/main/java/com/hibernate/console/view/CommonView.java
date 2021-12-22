@@ -34,8 +34,10 @@ public class CommonView {
                     break;
                 case 2:
                     runAccount();
+                    break;
                 case 3:
                     runCustomer();
+                    break;
                 case 4:
                     go = false;
                     break;
