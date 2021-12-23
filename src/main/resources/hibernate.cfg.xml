@@ -15,8 +15,5 @@
         <mapping class="com.hibernate.console.model.Order"/>
         <mapping class="com.hibernate.console.model.Account"/>
         <mapping class="com.hibernate.console.model.Customer"/>
-
-        <!-- DB schema will be updated if needed -->
-        <!--<property name="hibernate.hbm2ddl.auto">update</property> -->
     </session-factory>
 </hibernate-configuration>
