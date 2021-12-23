@@ -27,10 +27,11 @@ public class Customer extends BaseEntity {
     public Customer() {
     }
 
-    public Customer(Long id, String name, String surname) {
-        this.id = id;
+    public Customer(String name, String surname, Account account, Set<Order> orders) {
         this.name = name;
         this.surname = surname;
+        this.account = account;
+        this.orders = orders;
     }
 
     public Customer(Long id, String name, String surname, Account account, Set<Order> orders) {

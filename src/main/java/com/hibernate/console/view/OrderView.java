@@ -34,11 +34,9 @@ public class OrderView {
     }
 
     public void saveOrder() {
-        System.out.println("Enter id:");
-        Long id = Long.parseLong(scanner.next());
         System.out.println("Enter order:");
         String orderName = scanner.next();
-        Order newOrder = new Order(id, orderName);
+        Order newOrder = new Order(orderName);
         controller.saveOrder(newOrder);
     }
 

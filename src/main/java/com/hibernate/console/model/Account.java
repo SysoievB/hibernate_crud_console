@@ -19,6 +19,10 @@ public class Account extends BaseEntity {
         this.id = id;
     }
 
+    public Account(AccountStatus status) {
+        this.status = status;
+    }
+
     public Account(Long id, AccountStatus status) {
         this.id = id;
         this.status = status;

@@ -1,6 +1,8 @@
 package com.hibernate.console.view;
 
+import com.hibernate.console.controller.AccountController;
 import com.hibernate.console.controller.CustomerController;
+import com.hibernate.console.controller.OrderController;
 import com.hibernate.console.model.Account;
 import com.hibernate.console.model.Customer;
 import com.hibernate.console.model.Order;
@@ -12,6 +14,8 @@ import java.util.Set;
 public class CustomerView {
     private Scanner scanner = new Scanner(System.in);
     private CustomerController customerController = new CustomerController();
+    private AccountController accountController = new AccountController();
+    private OrderController specialtyController = new OrderController();
 
     public void printCustomers() {
         System.out.println("List of all customers:");
@@ -39,19 +43,17 @@ public class CustomerView {
     }
 
     public void saveCustomer() {
-        System.out.println("Enter id:");
-        Long id = Long.parseLong(scanner.next());
         System.out.println("Enter name:");
         String name = scanner.next();
         System.out.println("Enter surname:");
         String surname = scanner.next();
         System.out.println("Enter id of account:");
         Long idAccount = Long.parseLong(scanner.next());
-        Account account = new Account(idAccount);
+        Account account = accountController.getValueByIndex(idAccount);
         Set<Order> orderSet = new HashSet<>();
         System.out.println("Enter id of order:");
         Long idOrder = Long.parseLong(scanner.next());
-        orderSet.add(new Order(idOrder));
+        orderSet.add(specialtyController.getValueByIndex(idOrder));
         boolean go = true;
         while (go) {
             System.out.println("Do You want to add one more id of order? 1.Yes 2.No");
@@ -60,7 +62,7 @@ public class CustomerView {
                 case ("1"):
                     System.out.println("Enter id of new order:");
                     Long newIdOrder = Long.parseLong(scanner.next());
-                    orderSet.add(new Order(newIdOrder));
+                    orderSet.add(specialtyController.getValueByIndex(newIdOrder));
                     break;
                 case ("2"):
                     System.out.println("You choose do not add new order");
@@ -68,7 +70,7 @@ public class CustomerView {
                     break;
             }
         }
-        Customer newCustomer = new Customer(id, name, surname, account, orderSet);
+        Customer newCustomer = new Customer(name, surname, account, orderSet);
         customerController.saveCustomer(newCustomer);
     }
 
@@ -82,11 +84,11 @@ public class CustomerView {
         String surname = scanner.next();
         System.out.println("Enter id of account:");
         Long idAccount = Long.parseLong(scanner.next());
-        Account account = new Account(idAccount);
+        Account account = accountController.getValueByIndex(idAccount);
         Set<Order> orderSet = new HashSet<>();
         System.out.println("Enter id of order:");
         Long idOrder = Long.parseLong(scanner.next());
-        orderSet.add(new Order(idOrder));
+        orderSet.add(specialtyController.getValueByIndex(idOrder));
         boolean go = true;
         while (go) {
             System.out.println("Do You want to add one more id of order? 1.Yes 2.No");
@@ -95,7 +97,7 @@ public class CustomerView {
                 case ("1"):
                     System.out.println("Enter id of new order:");
                     Long newIdOrder = Long.parseLong(scanner.next());
-                    orderSet.add(new Order(newIdOrder));
+                    orderSet.add(specialtyController.getValueByIndex(newIdOrder));
                     break;
                 case ("2"):
                     System.out.println("You choose do not add new order");

@@ -37,9 +37,7 @@ public class AccountView {
     }
 
     public void saveAccount() {
-        System.out.println("Enter id:");
-        Long id = Long.parseLong(scanner.next());
-        Account newAccount = new Account(id, AccountStatus.ACTIVE);
+        Account newAccount = new Account(AccountStatus.ACTIVE);
         accountController.saveAccount(newAccount);
     }
 
