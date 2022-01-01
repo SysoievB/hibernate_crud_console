@@ -37,8 +37,6 @@ class CustomerControllerTest {
 
     @AfterEach
     void tearDown() {
-        orderController.deleteOrder(order.getId());
-        accountController.deleteAccount(account.getId());
         customerController.deleteCustomer(customer.getId());
     }
 
@@ -65,14 +63,27 @@ class CustomerControllerTest {
         customerController.saveCustomer(customer);
 
         customerController.deleteCustomer(customer.getId());
-        orderController.deleteOrder(order.getId());
-        accountController.deleteAccount(account.getId());
 
         assertNull(orderController.getValueByIndex(customer.getId()), "Customer should be null");
     }
 
     @Test
     void updateCustomerTest() {
+        customer.setName("new_test");
+
+        customer.setSurname("new_test");
+
+        Order order = new Order("new_test_order");
+        orderController.saveOrder(order);
+        Set<Order> orders = new HashSet<>(Arrays.asList(order));
+        customer.setOrders(orders);
+
+        customer.setAccount(new Account(AccountStatus.BANNED));
+
+        customerController.updateCustomer(customer.getId(), customer);
+
+        String updateName = customerController.getValueByIndex(customer.getId()).getName();
+        assertEquals("new_test", updateName);
     }
 
     @Test
