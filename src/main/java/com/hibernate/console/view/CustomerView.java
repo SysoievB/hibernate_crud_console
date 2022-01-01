@@ -15,7 +15,7 @@ public class CustomerView {
     private Scanner scanner = new Scanner(System.in);
     private CustomerController customerController = new CustomerController();
     private AccountController accountController = new AccountController();
-    private OrderController specialtyController = new OrderController();
+    private OrderController orderController = new OrderController();
 
     public void printCustomers() {
         System.out.println("List of all customers:");
@@ -53,7 +53,7 @@ public class CustomerView {
         Set<Order> orderSet = new HashSet<>();
         System.out.println("Enter id of order:");
         Long idOrder = Long.parseLong(scanner.next());
-        orderSet.add(specialtyController.getValueByIndex(idOrder));
+        orderSet.add(orderController.getValueByIndex(idOrder));
         boolean go = true;
         while (go) {
             System.out.println("Do You want to add one more id of order? 1.Yes 2.No");
@@ -62,7 +62,7 @@ public class CustomerView {
                 case ("1"):
                     System.out.println("Enter id of new order:");
                     Long newIdOrder = Long.parseLong(scanner.next());
-                    orderSet.add(specialtyController.getValueByIndex(newIdOrder));
+                    orderSet.add(orderController.getValueByIndex(newIdOrder));
                     break;
                 case ("2"):
                     System.out.println("You choose do not add new order");
@@ -73,7 +73,6 @@ public class CustomerView {
         Customer newCustomer = new Customer(name, surname, account, orderSet);
         customerController.saveCustomer(newCustomer);
     }
-
 
     public void updateCustomer() {
         System.out.println("Enter id in order to find element:");
@@ -88,7 +87,7 @@ public class CustomerView {
         Set<Order> orderSet = new HashSet<>();
         System.out.println("Enter id of order:");
         Long idOrder = Long.parseLong(scanner.next());
-        orderSet.add(specialtyController.getValueByIndex(idOrder));
+        orderSet.add(orderController.getValueByIndex(idOrder));
         boolean go = true;
         while (go) {
             System.out.println("Do You want to add one more id of order? 1.Yes 2.No");
@@ -97,7 +96,7 @@ public class CustomerView {
                 case ("1"):
                     System.out.println("Enter id of new order:");
                     Long newIdOrder = Long.parseLong(scanner.next());
-                    orderSet.add(specialtyController.getValueByIndex(newIdOrder));
+                    orderSet.add(orderController.getValueByIndex(newIdOrder));
                     break;
                 case ("2"):
                     System.out.println("You choose do not add new order");
